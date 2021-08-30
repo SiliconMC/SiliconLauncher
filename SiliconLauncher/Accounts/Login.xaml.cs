@@ -11,7 +11,7 @@ namespace SiliconLauncher
         {
             var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
             Thread.Sleep(1500);
-            if (File.Exists(SiliconData + "\\Silicon\\account.json") || File.Exists(SiliconData + "\\Silicon\\microsoft_account.json"))
+            if (File.Exists(SiliconData + "\\Silicon\\account.json"))
             {
                 MainWindow mainWin = new MainWindow();
                 mainWin.Show();

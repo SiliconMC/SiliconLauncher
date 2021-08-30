@@ -26,6 +26,11 @@ namespace SiliconLauncher
 
         private void ReturnButton_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
+
+        private void AdonisWindow_Closed(object sender, EventArgs e)
+        {
             MainWindow mainWin = new MainWindow();
             mainWin.Show();
             Close();

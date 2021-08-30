@@ -26,48 +26,31 @@ namespace SiliconLauncher
             Loaded += (s, e) =>
             {
                 var accountJson = "\\Silicon\\account.json";
-                bool isMicrosoft = false;
 
                 var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-                if (!File.Exists(SiliconData + "\\Silicon\\account.json"))
-                {
-                    accountJson = "\\Silicon\\microsoft_account.json";
-                    isMicrosoft = true;
-                }
-                Account userInfo = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
+                Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
                 MinimizeButton.IsEnabled = true;
                 MaximizeRestoreButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
-                LoggedInAsLabel.Content = "Logged in as " + userInfo.SelectedProfile.Name;
-                AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + userInfo.SelectedProfile.Id + ".png"));
+                LoggedInAsLabel.Content = "Logged in as " + account.username;
+                AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.uuid + ".png"));
             };
         }
 
         private void LaunchButton_Click(object sender, RoutedEventArgs e)
         {
             var accountJson = "\\Silicon\\account.json";
-            bool isMicrosoft = false;
 
             var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            if (!File.Exists(SiliconData + "\\Silicon\\account.json"))
-            {
-                accountJson = "\\Silicon\\microsoft_account.json";
-                isMicrosoft = true;
-            }
-            Account userInfo = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
+            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
 
-            SiliconHelper.LaunchGame(userInfo.AccessToken, userInfo.SelectedProfile.Id, userInfo.SelectedProfile.Name);
+            SiliconHelper.LaunchGame(account.accessToken, account.uuid, account.username);
         }
 
         private void LaunchButton_Relaunch(object sender, RoutedEventArgs e)
         {
             var accountJson = "\\Silicon\\account.json";
             var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-
-            if (!File.Exists(SiliconData + "\\Silicon\\account.json"))
-            {
-                accountJson = "\\Silicon\\microsoft_account.json";
-            }
 
             File.Delete(SiliconData + accountJson);
             SiliconHelper.Relaunch();
@@ -79,19 +62,14 @@ namespace SiliconLauncher
             bool isMicrosoft = false;
 
             var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            if (!File.Exists(SiliconData + "\\Silicon\\account.json"))
-            {
-                accountJson = "\\Silicon\\microsoft_account.json";
-                isMicrosoft = true;
-            }
-            Account userInfo = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
+            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
 
             if (isMicrosoft)
             {
                 MicrosoftAccounts.Logout();
             } else
             {
-                MojangAccounts.Logout(userInfo.AccessToken, userInfo.ClientToken);
+                MojangAccounts.Logout(account.accessToken);
             }
             SiliconHelper.LoggingOut("User initiated log out.");
             LaunchButton.Click -= LaunchButton_Click;
@@ -99,37 +77,12 @@ namespace SiliconLauncher
             LaunchButton.Click += new RoutedEventHandler(LaunchButton_Relaunch);
         }
 
-        public class SelectedProfile
-        {
-            [JsonProperty("name")]
-            public string Name { get; set; }
-
-            [JsonProperty("id")]
-            public string Id { get; set; }
-        }
-
-        public class AvailableProfile
-        {
-            [JsonProperty("name")]
-            public string Name { get; set; }
-
-            [JsonProperty("id")]
-            public string Id { get; set; }
-        }
-
         public class Account
         {
-            [JsonProperty("clientToken")]
-            public string ClientToken { get; set; }
-
-            [JsonProperty("accessToken")]
-            public string AccessToken { get; set; }
-
-            [JsonProperty("selectedProfile")]
-            public SelectedProfile SelectedProfile { get; set; }
-
-            [JsonProperty("availableProfiles")]
-            public List<AvailableProfile> AvailableProfiles { get; set; }
+            public string accessToken { get; set; }
+            public string username { get; set; }
+            public string uuid { get; set; }
+            public bool isMsft { get; set; }
         }
 
         internal static MainWindow mainWin;
@@ -139,6 +92,11 @@ namespace SiliconLauncher
             Settings settingsWin = new Settings();
             settingsWin.Show();
             Hide();
+        }
+
+        private void AdonisWindow_Closed(object sender, EventArgs e)
+        {
+            Environment.Exit(1);
         }
     }
 }

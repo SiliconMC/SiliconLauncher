@@ -23,6 +23,12 @@ namespace SiliconLauncher
             Application.Current.Shutdown();
         }
 
+        public static void Quit()
+        {
+            Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
+
         public static void LoggingOut(string subreason)
         {
             MainWindow.mainWin.WelcomeBackLabel.Content = "Logged out.";
