@@ -7,32 +7,21 @@
         mc:Ignorable="d"
         xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
         xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-        xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
+
         Title="Silicon"
-        ResizeMode="NoResize" Height="277.038" Width="510.671" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen" Closed="AdonisWindow_Closed">
+        ResizeMode="NoResize" Height="270" Width="510" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen" Closed="AdonisWindow_Closed">
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}" />
     </Window.Style>
-    <Grid Background="#FF121212" Height="248" VerticalAlignment="Top" >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="252*" />
-            <ColumnDefinition Width="252*" />
-        </Grid.ColumnDefinitions>
-        <Label x:Name="WelcomeBackLabel" Content="Welcome back" HorizontalAlignment="Right" Margin="0,19,81,183" Width="338" FontFamily="/Silicon;component/Assets/#Inter" FontSize="39" Grid.ColumnSpan="2" HorizontalContentAlignment="Center"/>
-        <Label x:Name="LoggedInAsLabel" Content="User not logged in. Please restart Silicon." HorizontalAlignment="Right" Margin="0,68,88,162" Width="327" FontFamily="/Silicon;component/Assets/#Inter" Grid.ColumnSpan="2" FontWeight="Normal" RenderTransformOrigin="0.5,0.5"  HorizontalContentAlignment="Center"/>
-        <Button x:Name="LaunchButton" Content="Launch" HorizontalAlignment="Left" Height="34" Margin="207,117,0,0" VerticalAlignment="Top" Width="188" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Grid.ColumnSpan="2" Background="#FF202020" Click="LaunchButton_Click"/>
-        <Button x:Name="SettingsButton" Content="Settings" HorizontalAlignment="Left" Height="34" Margin="207,161,0,0" VerticalAlignment="Top" Width="88" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Grid.ColumnSpan="2" Click="SettingsButton_Click"/>
-        <Button x:Name="LogOutButton" Content="Log out" HorizontalAlignment="Right" Height="34" Margin="0,161,111,0" VerticalAlignment="Top" Width="94" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LogoutButton_Click" Grid.Column="1"/>
-        <TextBlock x:Name="VersionText" IsHitTestVisible="False" Text="Ready to start!" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="6,222,0,0" Padding="6,3,0,0" Height="20" Width="223" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Foreground="#FFA6A6A6" FontStyle="Italic"/>
-        <Image x:Name="AvatarImage" HorizontalAlignment="Left" Height="78" Margin="113,117,0,0" VerticalAlignment="Top" Width="78" Source="/Silicon;component/Assets/account-notsignedin.png"/>
+    <Grid>
+        <Label x:Name="WelcomeBackLabel" Content="Welcome back" HorizontalAlignment="Right" Margin="0,0,57,156" Width="288" FontFamily="/Silicon;component/Assets/#Inter" FontSize="39" VerticalAlignment="Bottom" Height="65" VerticalContentAlignment="Bottom" />
+        <Label x:Name="LoggedInAsLabel" Content="User not logged in. Please restart Silicon." HorizontalAlignment="Right" Margin="0,87,105,136" Width="240" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal"/>
+        <Button x:Name="LaunchButton" HorizontalAlignment="Left" Height="64" Margin="92,147,0,0" VerticalAlignment="Top" Width="223" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LaunchButton_Click">
+            <Label x:Name="PLAYText" Content="PLAY" HorizontalAlignment="Center" Width="213" FontFamily="/Silicon;component/Assets/#Inter" FontSize="36" Height="56" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" />
+        </Button>
+        <Button x:Name="SettingsButton" Content="Settings" Height="30" Margin="320,147,84,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="SettingsButton_Click" Width="100" />
+        <Button x:Name="LogOutButton" Content="Log out" Height="29" Margin="320,182,84,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LogoutButton_Click" Width="100"/>
+        <TextBlock x:Name="VersionText" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="92,211,0,0" Padding="6,3,0,0" Height="20" Width="223" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Foreground="#FFA6A6A6"/>
+        <Image x:Name="AvatarImage" HorizontalAlignment="Left" Height="78" Margin="66,34,0,0" VerticalAlignment="Top" Width="78" Source="/Silicon;component/Assets/account-notsignedin.png"/>
     </Grid>
-    <adonisControls:AdonisWindow.TitleBarContent>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-            <Button Content="?"
-                    Style="{DynamicResource {x:Static adonisUi:Styles.WindowButton}}"
-                    FontFamily="/Silicon;component/Assets/#Inter"
-                    FontSize="14" />
-        </StackPanel>
-    </adonisControls:AdonisWindow.TitleBarContent>
 </adonisControls:AdonisWindow>

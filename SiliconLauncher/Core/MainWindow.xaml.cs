@@ -32,7 +32,7 @@ namespace SiliconLauncher
                 MinimizeButton.IsEnabled = true;
                 MaximizeRestoreButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
-                LoggedInAsLabel.Content = "Logged in as " + account.username;
+                LoggedInAsLabel.Content = account.username;
                 AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.uuid + ".png"));
             };
         }
@@ -67,7 +67,8 @@ namespace SiliconLauncher
             if (isMicrosoft)
             {
                 MicrosoftAccounts.Logout();
-            } else
+            }
+            else
             {
                 MojangAccounts.Logout(account.accessToken);
             }

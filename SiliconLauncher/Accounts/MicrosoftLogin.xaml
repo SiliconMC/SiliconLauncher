@@ -3,11 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SiliconLauncher"
         mc:Ignorable="d"
-        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
         xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-        xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
         Title="Silicon Login via Microsoft"
         ResizeMode="NoResize" Height="277.038" Width="510.671" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen">
     <Window.Style>
@@ -25,13 +22,4 @@
         <TextBlock x:Name="InformationLogin" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80.007,154.969,0,0" Padding="6,3,0,0" Height="63" Width="181.658" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Foreground="#FFA6A6A6" TextWrapping="Wrap" Grid.ColumnSpan="2"><Run Text="After logging in, select the entire code, copy then paste the code in. We'll take it from "/><Run Text="there."/></TextBlock>
         <Button x:Name="LoginButton" Content="Continue" HorizontalAlignment="Left" Height="34" Margin="14.665,162,0,0" VerticalAlignment="Top" Width="158" FontFamily="/Silicon;component/Assets/#Inter" Background="#FF202020" BorderBrush="#FF242424" Click="LoginButton_Click" Grid.Column="1"/>
     </Grid>
-    <adonisControls:AdonisWindow.TitleBarContent>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-            <Button Content="?"
-                    Style="{DynamicResource {x:Static adonisUi:Styles.WindowButton}}"
-                    FontFamily="/Silicon;component/Assets/#Inter"
-                    FontSize="14" />
-        </StackPanel>
-    </adonisControls:AdonisWindow.TitleBarContent>
 </adonisControls:AdonisWindow>

@@ -3,11 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SiliconLauncher"
         mc:Ignorable="d"
-        xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
         xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-        xmlns:adonisExtensions="clr-namespace:AdonisUI.Extensions;assembly=AdonisUI"
         Title="Choose login method for Silicon"
         ResizeMode="NoResize" Height="275.538" Width="510.671" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen">
     <Window.Style>
@@ -33,13 +30,4 @@
         </Button>
         <Label x:Name="InformationLabel" HorizontalContentAlignment="Center" Content="Select your method of choice to continue." HorizontalAlignment="Right" Margin="0,63.007,57,155.66" Width="382" FontFamily="/Silicon;component/Assets/#Inter" Grid.ColumnSpan="2" FontWeight="Normal" RenderTransformOrigin="0.5,0.5" />
     </Grid>
-    <adonisControls:AdonisWindow.TitleBarContent>
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-            <Button Content="?"
-                    Style="{DynamicResource {x:Static adonisUi:Styles.WindowButton}}"
-                    FontFamily="/Silicon;component/Assets/#Inter"
-                    FontSize="14" />
-        </StackPanel>
-    </adonisControls:AdonisWindow.TitleBarContent>
 </adonisControls:AdonisWindow>
