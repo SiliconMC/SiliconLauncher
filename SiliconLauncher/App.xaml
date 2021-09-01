@@ -10,7 +10,6 @@
                 <ResourceDictionary Source="pack://application:,,,/AdonisUI;component/ColorSchemes/Dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/AdonisUI.ClassicTheme;component/Resources.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
             <Color x:Key="{x:Static adonisUi:Colors.Layer1BackgroundColor}">#121212</Color>
             <Color x:Key="{x:Static adonisUi:Colors.Layer1BorderColor}">#212121</Color>
         </ResourceDictionary>

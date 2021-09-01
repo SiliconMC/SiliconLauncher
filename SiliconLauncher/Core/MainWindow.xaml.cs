@@ -32,7 +32,7 @@ namespace SiliconLauncher
                 MinimizeButton.IsEnabled = true;
                 MaximizeRestoreButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
-                LoggedInAsLabel.Content = account.username;
+                LoggedInAsLabel.Content = "Logged in as " + account.username;
                 AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.uuid + ".png"));
             };
         }

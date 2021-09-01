@@ -78,6 +78,7 @@
     <Compile Include="Core\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\JSON.cs" />
     <Compile Include="Helpers\SiliconHelper.cs" />
     <Compile Include="Accounts\MicrosoftLogin.xaml.cs">
       <DependentUpon>MicrosoftLogin.xaml</DependentUpon>

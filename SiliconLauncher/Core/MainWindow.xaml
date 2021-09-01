@@ -14,13 +14,13 @@
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}" />
     </Window.Style>
     <Grid>
-        <Label x:Name="WelcomeBackLabel" Content="Welcome back" HorizontalAlignment="Right" Margin="0,0,57,156" Width="288" FontFamily="/Silicon;component/Assets/#Inter" FontSize="39" VerticalAlignment="Bottom" Height="65" VerticalContentAlignment="Bottom" />
-        <Label x:Name="LoggedInAsLabel" Content="User not logged in. Please restart Silicon." HorizontalAlignment="Right" Margin="0,87,105,136" Width="240" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal"/>
-        <Button x:Name="LaunchButton" HorizontalAlignment="Left" Height="64" Margin="92,147,0,0" VerticalAlignment="Top" Width="223" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LaunchButton_Click">
-            <Label x:Name="PLAYText" Content="PLAY" HorizontalAlignment="Center" Width="213" FontFamily="/Silicon;component/Assets/#Inter" FontSize="36" Height="56" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" />
+        <Label x:Name="WelcomeBackLabel" Content="Welcome back" HorizontalAlignment="Right" Margin="0,0,63.667,156" Width="281.333" FontFamily="/Silicon;component/Assets/#Inter" FontSize="39" VerticalAlignment="Bottom" Height="65" VerticalContentAlignment="Bottom" />
+        <Label x:Name="LoggedInAsLabel" Content="User not logged in. Please restart Silicon." HorizontalAlignment="Right" Margin="0,85,105,138" Width="240" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal"/>
+        <Button x:Name="LaunchButton" HorizontalAlignment="Left" Height="64" Margin="66,147,0,0" VerticalAlignment="Top" Width="249" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LaunchButton_Click">
+            <Label x:Name="PLAYText" Content="PLAY" HorizontalAlignment="Center" Width="239" FontFamily="/Silicon;component/Assets/#Inter" FontSize="36" Height="56" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" />
         </Button>
-        <Button x:Name="SettingsButton" Content="Settings" Height="30" Margin="320,147,84,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="SettingsButton_Click" Width="100" />
-        <Button x:Name="LogOutButton" Content="Log out" Height="29" Margin="320,182,84,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LogoutButton_Click" Width="100"/>
+        <Button x:Name="SettingsButton" Content="Settings" Height="30" Margin="321,147,64,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="SettingsButton_Click" />
+        <Button x:Name="LogOutButton" Content="Log out" Height="29" Margin="321,182,64,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LogoutButton_Click"/>
         <TextBlock x:Name="VersionText" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="92,211,0,0" Padding="6,3,0,0" Height="20" Width="223" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Foreground="#FFA6A6A6"/>
         <Image x:Name="AvatarImage" HorizontalAlignment="Left" Height="78" Margin="66,34,0,0" VerticalAlignment="Top" Width="78" Source="/Silicon;component/Assets/account-notsignedin.png"/>
     </Grid>

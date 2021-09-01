@@ -16,11 +16,40 @@ using RestSharp.Authenticators;
 
 namespace SiliconLauncher
 {
+    class Accounts {
+        public static bool AccountSet(string token, string username, string uuid, bool isMsft)
+        {
+            try
+            {
+                var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+                Config config = new Config
+                {
+                    accessToken = token,
+                    username = username,
+                    uuid = uuid,
+                    isMsft = isMsft,
+
+                };
+                Directory.CreateDirectory(SiliconData + "\\Silicon");
+                File.WriteAllText(SiliconData + "\\Silicon\\account.json", JsonConvert.SerializeObject(config));
+                Thread.Sleep(1500);
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong when saving your profile. Reinstall the client and try again.");
+                return false;
+            }
+        }
+    }
+    
+
+
     class MojangAccounts
     {
         public static bool Authenticate(string username, string password)
         {
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            
             var client = new RestClient("https://authserver.mojang.com");
             var request = new RestRequest("authenticate", Method.POST);
             string json = JsonConvert.SerializeObject(new
@@ -45,43 +74,10 @@ namespace SiliconLauncher
                 return false;
             } else
             {
-                Config config = new Config
-                {
-                    accessToken = body.accessToken,
-                    username = body.selectedProfile.name,
-                    uuid = body.selectedProfile.id,
-                    isMsft = false
-
-                };
-                Directory.CreateDirectory(SiliconData + "\\Silicon");
-                File.WriteAllText(SiliconData + "\\Silicon\\account.json", JsonConvert.SerializeObject(config));
-                Thread.Sleep(1500);
+                Accounts.AccountSet(body.accessToken, body.selectedProfile.name, body.selectedProfile.id, false);
                 return true;
             }
         }
-
-        /*public static bool Validate(string accessToken, string clientToken)
-        {
-            var client = new RestClient("https://authserver.mojang.com");
-            var request = new RestRequest("validate", Method.POST);
-            string json = JsonConvert.SerializeObject(new
-            {
-                accessToken = accessToken,
-                clientToken = clientToken
-            }, Formatting.Indented);
-
-            request.AddParameter("application/json", json, ParameterType.RequestBody);
-
-            IRestResponse response = client.Execute(request);
-            if (response.StatusCode != HttpStatusCode.NoContent)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }*/
 
         public static void Logout(string accessToken)
         {
@@ -93,26 +89,6 @@ namespace SiliconLauncher
             MainWindow.mainWin.SettingsButton.IsEnabled = false;
             MainWindow.mainWin.LogOutButton.IsEnabled = false;
             MainWindow.mainWin.AvatarImage.Source = new BitmapImage(new Uri("https://minecraftfaces.com/wp-content/bigfaces/big-steve-face.png"));
-        }
-
-        public class SelectedProfile
-        {
-            public string name { get; set; }
-            public string id { get; set; }
-        }
-
-        public class AvailableProfile
-        {
-            public string name { get; set; }
-            public string id { get; set; }
-        }
-
-        public class Root
-        {
-            public string clientToken { get; set; }
-            public string accessToken { get; set; }
-            public SelectedProfile selectedProfile { get; set; }
-            public List<AvailableProfile> availableProfiles { get; set; }
         }
     }
 
@@ -222,51 +198,14 @@ namespace SiliconLauncher
             }
             else
             {
-                Config config = new Config
-                {
-                    accessToken = token,
-                    username = body.name,
-                    uuid = body.id,
-                    isMsft = true
-                };
-
-                var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-                MessageBox.Show("7");
-                Directory.CreateDirectory(SiliconData + "\\Silicon");
-                MessageBox.Show("8");
-                File.WriteAllText(SiliconData + "\\Silicon\\account.json", JsonConvert.SerializeObject(config));
-                Thread.Sleep(1500);
+                Accounts.AccountSet(token, body.name, body.id, true);
                 SiliconHelper.Relaunch();
+                
             }
 
         }
 
-        public class Xui
-        {
-            public string uhs { get; set; }
-        }
-
-        public class DisplayClaims
-        {
-            public List<Xui> xui { get; set; }
-        }
-
-        public class Root
-        {
-            public DateTime IssueInstant { get; set; }
-            public DateTime NotAfter { get; set; }
-            public string Token { get; set; }
-            public DisplayClaims DisplayClaims { get; set; }
-            public string access_token { get; set; }
-            public string accesstoken { get; set; }
-            public string id { get; set; }
-            public string name { get; set; }
-            public string path { get; set; }
-            public string errorType { get; set; }
-            public string error { get; set; }
-            public string errorMessage { get; set; }
-            public string developerMessage { get; set; }
-        }
+        
 
         public static void Logout()
         {
@@ -274,13 +213,5 @@ namespace SiliconLauncher
             File.Delete(SiliconData + "\\Silicon\\account.json");
         }
 
-    }
-
-    public class Config
-    {
-        public string accessToken { get; set; }
-        public string username { get; set; }
-        public string uuid { get; set; }
-        public bool isMsft { get; set; }
     }
 }
