@@ -17,6 +17,7 @@ using System.Net;
 using System.Diagnostics;
 using System.IO.Compression;
 using System.ComponentModel;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace SiliconLauncher
 {

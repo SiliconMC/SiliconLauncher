@@ -25,8 +25,7 @@ namespace SiliconLauncher
                 // Need to dispatch to UI thread if performing UI operations
                 Current.Dispatcher.Invoke(delegate
                 {
-                    // TODO: Show the corresponding content
-                    MessageBox.Show("Toast activated. Args: " + toastArgs.Argument);
+
                 });
             };
         }
