@@ -38,6 +38,9 @@ namespace SiliconLauncher
         public string accessToken { get; set; }
         public SelectedProfile selectedProfile { get; set; }
         public List<AvailableProfile> availableProfiles { get; set; }
+        public string currentClientVersion { get; set; }
+        public string currentLauncherVersion { get; set; }
+        public string currentServerVersion { get; set; }
     }
 
     public class Config
