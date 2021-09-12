@@ -36,19 +36,22 @@ namespace SiliconLauncher
                 MinimizeButton.IsEnabled = true;
                 MaximizeRestoreButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
-                LoggedInAsLabel.Content = "Logged in as " + account.username;
-                VersionText.Text = "Ready to start.";
-                AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.uuid + ".png"));
+                LoggedInAsLabel.Content = "Logged in as " + account.Username;
+                VersionText.Text = "Ready to start. Silicon is offline.";
 
-                SiliconHelper.checkUpdate();
+                if (Globals.isConnected)
+                {
+                    AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.Uuid + ".png"));
+                    VersionText.Text = "Ready to start.";
+                }
 
-                if(!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps") && !File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\SiliconClient.jar") && !Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\libraries"))
+                if(!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps") && !File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\SiliconClient.jar") && !Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\libraries") && Globals.isConnected)
                 {
                     PLAYText.Content = "DOWNLOAD";
                     LaunchButton.Click -= LaunchButton_Click;
                     ProgressBar.Opacity = 100;
                     LaunchButton.IsEnabled = true;
-                    VersionText.Text = "";
+                    VersionText.Text = "Required package: SiliconClient.";
                     LaunchButton.Click += new RoutedEventHandler(LaunchButton_Download);
                 }
             };
@@ -58,19 +61,21 @@ namespace SiliconLauncher
         {
             try
             {
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = "java.exe";
-                psi.Arguments = " -version";
-                psi.RedirectStandardError = true;
-                psi.UseShellExecute = false;
-                psi.CreateNoWindow = true;
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "java.exe",
+                    Arguments = " -version",
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
 
                 Process pr = Process.Start(psi);
                 string strOutput = pr.StandardError.ReadLine().Split(' ')[2].Replace("\"", "");
 
                 if (!strOutput.Contains("1.8"))
                 {
-                    MessageBox.Show("You have the wrong version of Java installed. We will try launch the game, however unexpected errors and bugs may occur. You can disable this warning in the Settings.");
+                    MessageBox.Show("You have the wrong version of Java installed. We will try launch the game, however unexpected errors and bugs may occur. You can disable this warning in the settings. Java version installed: " + strOutput);
                 }
             }
             catch (Exception ex)
@@ -84,7 +89,7 @@ namespace SiliconLauncher
             var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
             Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
 
-            SiliconHelper.LaunchGame(account.accessToken, account.uuid, account.username);
+            SiliconHelper.LaunchGame(account.AccessToken, account.Uuid, account.Username);
         }
 
         private void LaunchButton_Relaunch(object sender, RoutedEventArgs e)
@@ -101,11 +106,18 @@ namespace SiliconLauncher
             LaunchButton.IsEnabled = false;
             SettingsButton.IsEnabled = false;
             LogOutButton.IsEnabled = false;
-            using (WebClient client = new WebClient())
+
+            try
             {
-                client.DownloadFileAsync(new Uri("https://s3.ap-southeast-2.amazonaws.com/cdn.jacksta.dev/ShareX/2021/09/SiliconClient.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\client.zip");
-                client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(UpdateProgress);
-                client.DownloadFileCompleted += new AsyncCompletedEventHandler(FinishDownload);
+                using (WebClient client = new WebClient())
+                {
+                    client.DownloadFileAsync(new Uri("https://s3.ap-southeast-2.amazonaws.com/cdn.jacksta.dev/ShareX/2021/09/SiliconClient.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\client.zip");
+                    client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(UpdateProgress);
+                    client.DownloadFileCompleted += new AsyncCompletedEventHandler(FinishDownload);
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("An error occured. Exception: " + ex);
             }
         }
 
@@ -144,7 +156,7 @@ namespace SiliconLauncher
             }
             else
             {
-                MojangAccounts.Logout(account.accessToken);
+                MojangAccounts.Logout(account.AccessToken);
             }
             SiliconHelper.LoggingOut("User initiated log out.");
             LaunchButton.Click -= LaunchButton_Click;
@@ -154,10 +166,10 @@ namespace SiliconLauncher
 
         public class Account
         {
-            public string accessToken { get; set; }
-            public string username { get; set; }
-            public string uuid { get; set; }
-            public bool isMsft { get; set; }
+            public string AccessToken { get; set; }
+            public string Username { get; set; }
+            public string Uuid { get; set; }
+            public bool IsMsft { get; set; }
         }
 
         internal static MainWindow mainWin;

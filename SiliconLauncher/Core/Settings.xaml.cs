@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,11 @@ namespace SiliconLauncher
         public Settings()
         {
             InitializeComponent();
+            var versionInfo = FileVersionInfo.GetVersionInfo(Application.ResourceAssembly.Location);
+            string version = versionInfo.FileVersion;
             Loaded += (s, e) =>
             {
+                SiliconVersion.Text = "You are using SiliconLauncher " + version;
             };
         }
 

@@ -10,13 +10,21 @@ using Windows.Foundation.Collections;
 
 namespace SiliconLauncher
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public static class Globals {
+        public static bool isConnected;
+    }
+    public partial class App
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            if (SiliconHelper.CheckInternetConnection())
+            {
+                Globals.isConnected = true;
+            } else
+            {
+                Globals.isConnected = false;
+                MessageBox.Show("Silicon has detected no internet connection. Try basic troubleshooting steps to restore launcher functionality.");
+            }
             ToastNotificationManagerCompat.OnActivated += toastArgs =>
             {
                 // Obtain the arguments from the notification
