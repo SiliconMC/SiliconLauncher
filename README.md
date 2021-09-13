@@ -4,7 +4,7 @@
 
 **Also known as the Silicon launcher.**
 
-The Silicon launcher is currently in a public testing phase. We wanted to release a version of the launcher that is fully functional aside from launching the game (and related settings). **If you would like to help out, click [here](https://github.com/SiliconMC/SiliconLauncher/releases/tag/v1.0.0-pb)**.
+The Silicon launcher is currently in a public testing phase. We wanted to release a version of the launcher that is fully functional aside from launching the game (and related settings). **If you would like to help out, click [here](https://github.com/SiliconMC/SiliconLauncher/releases/)**.
 
 ## Contributing
 
