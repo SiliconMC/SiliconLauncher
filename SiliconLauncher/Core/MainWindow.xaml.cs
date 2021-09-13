@@ -161,7 +161,7 @@ namespace SiliconLauncher
             {
                 using (WebClient client = new WebClient())
                 {
-                    client.DownloadFileAsync(new Uri("https://github.com/SiliconMC/SiliconLauncher/releases/latest/SiliconInstaller.exe"), AppDomain.CurrentDomain.BaseDirectory + @"\siliconinstaller-latest.exe");
+                    client.DownloadFileAsync(new Uri("https://github.com/SiliconMC/siliconlauncher/releases/latest/download/SiliconInstaller.exe"), AppDomain.CurrentDomain.BaseDirectory + @"\siliconinstaller-latest.exe");
                     client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(UpdateProgress);
                     client.DownloadFileCompleted += new AsyncCompletedEventHandler(FinishDownload_Launcher);
                 }
