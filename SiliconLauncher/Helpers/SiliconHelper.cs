@@ -45,48 +45,23 @@ namespace SiliconLauncher
             return null;
         }
 
-        public static void CheckForUpdates()
+        public static void DeleteDirectory(string target_dir)
         {
-            var client = new RestClient("https://silicon-api.jacksta.workers.dev/status");
-            var request = new RestRequest("authenticate", Method.GET);
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
 
-            IRestResponse response = client.Execute(request);
-            Root body = JsonConvert.DeserializeObject<Root>(response.Content);
-
-            var versionInfo = FileVersionInfo.GetVersionInfo(Application.ResourceAssembly.Location);
-            string clientVersion = versionInfo.FileVersion;
-
-            try
+            foreach (string file in files)
             {
-                if (body == null)
-                {
-                    return;
-                }
-
-                if (body.currentLauncherVersion == clientVersion)
-                {
-                    new ToastContentBuilder()
-        .AddArgument("action", "viewConversation")
-        .AddArgument("conversationId", 9813)
-        .AddText("Silicon Update")
-        .AddText("An new update is available for Silicon.")
-        .AddButton(new ToastButton()
-            .SetContent("Update")
-            .AddArgument("action", "update")
-            .SetBackgroundActivation())
-
-        .AddButton(new ToastButton()
-            .SetContent("Ask me later")
-            .AddArgument("action", "updatelater")
-            .SetBackgroundActivation())
-        .Show();
-                    return;
-                }
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
             }
-            catch (Exception e)
+
+            foreach (string dir in dirs)
             {
-                MessageBox.Show("An error occured. Exception: " + e);
+                DeleteDirectory(dir);
             }
+
+            Directory.Delete(target_dir, false);
         }
 
         public static void Relaunch()
@@ -106,7 +81,7 @@ namespace SiliconLauncher
             Ping check = new Ping();
             try
             {
-                PingReply reply = check.Send("1.1.1.1", 1000);
+                PingReply reply = check.Send("1.1.1.1", 3000);
                 if (reply.Status == IPStatus.Success)
                     return true;
             }

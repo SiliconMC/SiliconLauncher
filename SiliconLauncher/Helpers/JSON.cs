@@ -41,6 +41,7 @@ namespace SiliconLauncher
         public string currentClientVersion { get; set; }
         public string currentLauncherVersion { get; set; }
         public string currentServerVersion { get; set; }
+        public string version { get; set; }
     }
 
     public class Config
