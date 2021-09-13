@@ -21,7 +21,7 @@ namespace SiliconLauncher
         {
             try
             {
-                var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+                string SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                 Config config = new Config
                 {
                     accessToken = token,
@@ -35,9 +35,9 @@ namespace SiliconLauncher
                 Thread.Sleep(1500);
                 return true;
             }
-            catch
+            catch (Exception e)
             {
-                MessageBox.Show("Something went wrong when saving your profile. Reinstall the client and try again.");
+                MessageBox.Show("Something went wrong when saving your profile. Reinstall the client and try again. Exception: " + e);
                 return false;
             }
         }
@@ -59,8 +59,8 @@ namespace SiliconLauncher
                     name = "Minecraft",
                     version = 1
                 },
-                username = username,
-                password = password
+                username,
+                password
             }, Formatting.Indented);
 
             request.AddParameter("application/json", json, ParameterType.RequestBody);
