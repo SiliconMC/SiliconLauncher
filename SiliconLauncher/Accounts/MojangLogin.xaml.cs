@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows;
 using System.IO;
 using System.Threading;
+using System.Windows;
 
 namespace SiliconLauncher
 {
@@ -46,7 +46,7 @@ namespace SiliconLauncher
                 mainWin.Show();
                 Close();
             }
-            
+
         }
 
         internal static MojangLogin main;

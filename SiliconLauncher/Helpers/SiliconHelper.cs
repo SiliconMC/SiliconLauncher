@@ -1,28 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
 using System.Diagnostics;
+using System.IO;
+using System.Net.NetworkInformation;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using System.IO;
-using System.Net;
-using RestSharp;
-using Newtonsoft.Json;
-using Microsoft.Toolkit.Uwp.Notifications;
-using System.Net.NetworkInformation;
 
 namespace SiliconLauncher
 {
     class SiliconHelper
     {
-        
+
         public static void LaunchGame(string accessToken, string uuid, string username)
         {
-            
-            var minecraftDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +  "\\.minecraft";
+
+            var minecraftDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\.minecraft";
             var installDirectory = Environment.CurrentDirectory;
             var clientResources = installDirectory + "\\deps";
             var javaRuntime = FindJava();
@@ -85,7 +76,8 @@ namespace SiliconLauncher
                 if (reply.Status == IPStatus.Success)
                     return true;
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 throw;
             }
             return result;

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json;
-using RestSharp;
 
 namespace SiliconLauncher.Helpers
 {
@@ -15,7 +11,7 @@ namespace SiliconLauncher.Helpers
     {
         public static bool checkLauncher()
         {
-            var client = new RestClient("https://silicon-api.jacksta.workers.dev/status");
+            var client = new RestClient("https://status.jacksta.dev/json");
             var request = new RestRequest("authenticate", Method.GET);
 
             IRestResponse response = client.Execute(request);
@@ -28,7 +24,7 @@ namespace SiliconLauncher.Helpers
             {
                 if (body == null) return false;
 
-                if (body.currentLauncherVersion != clientVersion) return true;
+                if (body.silicon.launcher.prod.version != clientVersion) return true;
 
                 return false;
             }
@@ -41,7 +37,7 @@ namespace SiliconLauncher.Helpers
 
         public static bool checkClient()
         {
-            var client = new RestClient("https://silicon-api.jacksta.workers.dev/status");
+            var client = new RestClient("https://status.jacksta.dev/json");
             var request = new RestRequest("authenticate", Method.GET);
 
             IRestResponse response = client.Execute(request);
@@ -57,7 +53,7 @@ namespace SiliconLauncher.Helpers
             {
                 if (body == null) return false;
 
-                if (body.currentClientVersion != version.version) return true;
+                if (body.silicon.client.prod.version != version.version) return true;
 
                 return false;
             }

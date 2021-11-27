@@ -1,24 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.IO;
-using System.Net.Http;
-using System.Threading;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
 using Newtonsoft.Json;
-using System.Net;
-using System.Diagnostics;
-using System.IO.Compression;
-using System.ComponentModel;
-using Microsoft.Toolkit.Uwp.Notifications;
 using SiliconLauncher.Helpers;
+using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
+using System.Net;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace SiliconLauncher
 {
@@ -33,7 +23,7 @@ namespace SiliconLauncher
 
             InitializeComponent();
             mainWin = this;
-            
+
             Loaded += (s, e) =>
             {
                 MinimizeButton.IsEnabled = true;
@@ -44,7 +34,7 @@ namespace SiliconLauncher
 
                 if (Globals.isConnected)
                 {
-                    AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.Uuid + ".png"));
+                    AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.Uuid + ".png?overlay"));
                     VersionText.Text = "Ready to start.";
 
                     if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps") && !File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\SiliconClient.jar") && !Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\libraries") && Globals.isConnected)
@@ -56,7 +46,8 @@ namespace SiliconLauncher
                         VersionText.Text = "Required package: SiliconClient.";
                         LaunchButton.Click += new RoutedEventHandler(LaunchButton_UpdateClient);
                         return;
-                    } else if (Updater.checkClient())
+                    }
+                    else if (Updater.checkClient())
                     {
                         PLAYText.Content = "UPDATE";
                         LaunchButton.Click -= LaunchButton_Click;
@@ -75,7 +66,7 @@ namespace SiliconLauncher
                         VersionText.Text = "Launcher update required.";
                         LaunchButton.Click += new RoutedEventHandler(LaunchButton_UpdateLauncher);
                     }
-                    
+
 #endif
                 }
                 else
@@ -140,11 +131,12 @@ namespace SiliconLauncher
             {
                 using (WebClient client = new WebClient())
                 {
-                    client.DownloadFileAsync(new Uri("https://s3.ap-southeast-2.amazonaws.com/jackstacdn/siliconclient-latest.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\siliconclient-latest.zip");
+                    client.DownloadFileAsync(new Uri("https://cdn.jacksta.dev/silicon/client/siliconclient-latest.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\siliconclient-latest.zip");
                     client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(UpdateProgress);
                     client.DownloadFileCompleted += new AsyncCompletedEventHandler(FinishDownload_Client);
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("An error occured. Exception: " + ex);
             }

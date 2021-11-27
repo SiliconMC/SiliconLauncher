@@ -1,22 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using RestSharp.Authenticators;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
-using System.Windows;
-using Newtonsoft.Json;
-using RestSharp;
 using System.Threading;
+using System.Windows;
 using System.Windows.Media.Imaging;
-using System.Diagnostics;
-using RestSharp.Authenticators;
 
 namespace SiliconLauncher
 {
-    class Accounts {
+    class Accounts
+    {
         public static bool AccountSet(string token, string username, string uuid, bool isMsft)
         {
             try
@@ -42,14 +38,14 @@ namespace SiliconLauncher
             }
         }
     }
-    
+
 
 
     class MojangAccounts
     {
         public static bool Authenticate(string username, string password)
         {
-            
+
             var client = new RestClient("https://authserver.mojang.com");
             var request = new RestRequest("authenticate", Method.POST);
             string json = JsonConvert.SerializeObject(new
@@ -72,7 +68,8 @@ namespace SiliconLauncher
             {
                 MessageBox.Show("Incorrect credentials.");
                 return false;
-            } else
+            }
+            else
             {
                 Accounts.AccountSet(body.accessToken, body.selectedProfile.name, body.selectedProfile.id, false);
                 return true;
@@ -200,12 +197,12 @@ namespace SiliconLauncher
             {
                 Accounts.AccountSet(token, body.name, body.id, true);
                 SiliconHelper.Relaunch();
-                
+
             }
 
         }
 
-        
+
 
         public static void Logout()
         {

@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Windows;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Diagnostics;
-using System.Net;
+using System.Windows;
 
 namespace SiliconLauncher
 {
@@ -22,7 +21,7 @@ namespace SiliconLauncher
             }
 
 
-           
+
             InitializeComponent();
 
 
@@ -48,7 +47,7 @@ namespace SiliconLauncher
             }
 
             MicrosoftAccounts.AuthenticateXBL(token);
-            
+
         }
 
         internal static MicrosoftLogin main;
