@@ -1,6 +1,6 @@
 [Setup]
 AppName=Silicon
-AppVersion=1.4.0
+AppVersion=1.6.1
 WizardStyle=modern
 DefaultDirName={autopf}\Silicon
 DefaultGroupName=Silicon
@@ -16,6 +16,8 @@ Source: "RestSharp.dll"; DestDir: "{app}"
 Source: "Newtonsoft.Json.dll"; DestDir: "{app}"
 Source: "AdonisUI.dll"; DestDir: "{app}"
 Source: "AdonisUI.ClassicTheme.dll"; DestDir: "{app}"
+Source: "System.ValueTuple.dll"; DestDir: "{app}"
+Source: "Microsoft.Toolkit.Uwp.Notifications.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\Silicon"; Filename: "{app}\Silicon.exe"
