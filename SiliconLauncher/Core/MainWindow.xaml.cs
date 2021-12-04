@@ -30,29 +30,29 @@ namespace SiliconLauncher
                 MaximizeRestoreButton.IsEnabled = false;
                 CloseButton.IsEnabled = true;
                 LoggedInAsLabel.Content = "Logged in as " + account.Username;
-                VersionText.Text = "Ready to start, Silicon is offline.";
+                StatusText.Content = "Ready to start, Silicon is offline.";
 
                 if (Globals.isConnected)
                 {
                     AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.Uuid + ".png?overlay"));
-                    VersionText.Text = "Ready to start.";
+                    StatusText.Content = "Ready to start.";
 
                     if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps") && !File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\SiliconClient.jar") && !Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\libraries") && Globals.isConnected)
                     {
 
-                        PLAYText.Content = "DOWNLOAD";
+                        LaunchButton.Content = "DOWNLOAD";
                         LaunchButton.Click -= LaunchButton_Click;
                         LaunchButton.IsEnabled = true;
-                        VersionText.Text = "Required package: SiliconClient.";
+                        StatusText.Content = "Required package: SiliconClient.";
                         LaunchButton.Click += new RoutedEventHandler(LaunchButton_UpdateClient);
                         return;
                     }
                     else if (Updater.checkClient())
                     {
-                        PLAYText.Content = "UPDATE";
+                        LaunchButton.Content = "UPDATE";
                         LaunchButton.Click -= LaunchButton_Click;
                         LaunchButton.IsEnabled = true;
-                        VersionText.Text = "Client update required.";
+                        StatusText.Content = "Client update required.";
                         LaunchButton.Click += new RoutedEventHandler(LaunchButton_UpdateClient);
                         return;
                     }
@@ -176,13 +176,13 @@ namespace SiliconLauncher
                 SiliconHelper.DeleteDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\deps");
             }
 
-            VersionText.Text = "Finishing up.";
+            StatusText.Content = "Finishing up.";
             ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\siliconclient-latest.zip", AppDomain.CurrentDomain.BaseDirectory + "\\deps");
             LaunchButton.Click -= LaunchButton_UpdateClient;
             ProgressBar.Opacity = 0;
             LaunchButton.Click += new RoutedEventHandler(LaunchButton_Click);
-            PLAYText.Content = "PLAY";
-            VersionText.Text = "Ready to start.";
+            LaunchButton.Content = "PLAY";
+            StatusText.Content = "Ready to start.";
             LaunchButton.IsEnabled = true;
             LogOutButton.IsEnabled = true;
             SettingsButton.IsEnabled = true;

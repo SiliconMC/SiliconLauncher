@@ -87,8 +87,8 @@ namespace SiliconLauncher
         {
             MainWindow.mainWin.WelcomeBackLabel.Content = "Logged out.";
             MainWindow.mainWin.LoggedInAsLabel.Content = "Restart Silicon to relogin.";
-            MainWindow.mainWin.VersionText.Text = subreason;
-            MainWindow.mainWin.PLAYText.Content = "RESTART";
+            MainWindow.mainWin.StatusText.Content = subreason;
+            MainWindow.mainWin.LaunchButton.Content = "RESTART";
             MainWindow.mainWin.SettingsButton.IsEnabled = false;
             MainWindow.mainWin.LogOutButton.IsEnabled = false;
             MainWindow.mainWin.AvatarImage.Source = new BitmapImage(new Uri(@"../Assets/account-notsignedin.png", UriKind.Relative));

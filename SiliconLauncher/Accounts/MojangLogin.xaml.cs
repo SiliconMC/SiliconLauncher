@@ -35,12 +35,13 @@ namespace SiliconLauncher
             var username = EmailBox.Text;
             var password = PassBox.Password;
 
-            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password) == true)
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Fill in your Mojang credentials.");
+                return;
             }
 
-            if (MojangAccounts.Authenticate(username, password) == true)
+            if (MojangAccounts.Authenticate(username, password))
             {
                 MainWindow mainWin = new MainWindow();
                 mainWin.Show();

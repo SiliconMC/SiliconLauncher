@@ -41,9 +41,10 @@ namespace SiliconLauncher
         {
             var token = TokenBox.Text;
 
-            if (String.IsNullOrEmpty(token) == true)
+            if (String.IsNullOrEmpty(token))
             {
                 MessageBox.Show("Fill in your Microsoft token.");
+                return;
             }
 
             MicrosoftAccounts.AuthenticateXBL(token);

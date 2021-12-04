@@ -10,7 +10,7 @@
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}" />
     </Window.Style>
-    <Grid Background="#FF121212" Height="246.538" VerticalAlignment="Top">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="252*" />
             <ColumnDefinition Width="252*" />

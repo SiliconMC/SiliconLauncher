@@ -14,15 +14,13 @@
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}" />
     </Window.Style>
     <Grid>
-        <Label x:Name="WelcomeBackLabel" Content="Welcome back" HorizontalAlignment="Right" Margin="0,0,64,161" Width="281" FontFamily="/Silicon;component/Assets/#Inter" FontSize="39" VerticalAlignment="Bottom" Height="66" VerticalContentAlignment="Bottom" />
-        <Label x:Name="LoggedInAsLabel" Content="User not logged in. Please restart Silicon." HorizontalAlignment="Right" Margin="0,85,105,138" Width="240" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal"/>
-        <Button x:Name="LaunchButton" HorizontalAlignment="Left" Height="64" Margin="66,147,0,0" VerticalAlignment="Top" Width="249" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LaunchButton_Click">
-            <Label x:Name="PLAYText" Content="PLAY" HorizontalAlignment="Center" Width="239" FontFamily="/Silicon;component/Assets/#Inter" FontSize="30" Height="56" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" />
-        </Button>
-        <Button x:Name="SettingsButton" Content="Settings" Height="30" Margin="321,147,64,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="SettingsButton_Click" />
-        <Button x:Name="LogOutButton" Content="Log out" Height="29" Margin="321,182,64,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LogoutButton_Click"/>
-        <TextBlock x:Name="VersionText" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="66,216,0,0" Padding="6,3,0,0" Height="20" Width="223" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Foreground="#FFA6A6A6"/>
-        <Image x:Name="AvatarImage" HorizontalAlignment="Left" Height="78" Margin="66,34,0,0" VerticalAlignment="Top" Width="78" Source="/Silicon;component/Assets/account-notsignedin.png"/>
-        <ProgressBar x:Name="ProgressBar" Height="20" Margin="66,216,64,0" VerticalAlignment="Top" Opacity="0"/>
+        <Label x:Name="WelcomeBackLabel" Content="Welcome back" HorizontalAlignment="Left" Height="52" Margin="164,27,0,0" VerticalAlignment="Top" Width="282" FontSize="36" FontFamily="/Silicon;component/Assets/#Inter" VerticalContentAlignment="Bottom"/>
+        <Label x:Name="LoggedInAsLabel" Content="User not logged in. Please restart Silicon." HorizontalAlignment="Left" Height="22" Margin="164,79,0,0" VerticalAlignment="Top" Width="282" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Top" Opacity="0.5"/>
+        <Image x:Name="AvatarImage" HorizontalAlignment="Left" Height="80" Margin="66,27,0,0" VerticalAlignment="Top" Width="80" Source="/Silicon;component/Assets/account-notsignedin.png"/>
+        <Button x:Name="LaunchButton" HorizontalAlignment="Left" Height="64" Margin="66,140,0,0" VerticalAlignment="Top" Width="249" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LaunchButton_Click" Content="PLAY" FontSize="36" FontWeight="Bold"/>
+        <Button x:Name="SettingsButton" Content="SETTINGS" Height="30" Margin="321,140,64,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="SettingsButton_Click" />
+        <Button x:Name="LogOutButton" Content="LOG OUT" Height="28" Margin="321,176,64,0" VerticalAlignment="Top" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LogoutButton_Click"/>
+        <Label x:Name="StatusText" Content="Ready to start." HorizontalAlignment="Left" Height="20" Margin="66,209,0,0" VerticalAlignment="Top" Width="272" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" Opacity="0.5"/>
+        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Center" Height="20" Margin="0,209,0,0" VerticalAlignment="Top" Width="380" Opacity="0"/>
     </Grid>
 </adonisControls:AdonisWindow>

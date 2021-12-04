@@ -13,7 +13,7 @@ namespace SiliconLauncher
             string version = versionInfo.FileVersion;
             Loaded += (s, e) =>
             {
-                SiliconVersion.Text = "You are using SiliconLauncher " + version;
+                SiliconVersion.Content = "You are using SiliconLauncher " + version;
             };
         }
 
