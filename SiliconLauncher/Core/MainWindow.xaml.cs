@@ -16,13 +16,12 @@ namespace SiliconLauncher
     {
         public MainWindow()
         {
-            var accountJson = "\\Silicon\\account.json";
-
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
+            const string accountJson = "\\Silicon\\account.json";
+            
+            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(Globals.SiliconData + accountJson));
 
             InitializeComponent();
-            mainWin = this;
+            Main = this;
 
             Loaded += (s, e) =>
             {
@@ -32,41 +31,38 @@ namespace SiliconLauncher
                 LoggedInAsLabel.Content = "Logged in as " + account.Username;
                 StatusText.Content = "Ready to start, Silicon is offline.";
 
-                if (Globals.isConnected)
+                if (Globals.IsConnected)
                 {
                     AvatarImage.Source = new BitmapImage(new Uri("https://crafatar.com/avatars/" + account.Uuid + ".png?overlay"));
                     StatusText.Content = "Ready to start.";
 
-                    if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps") && !File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\SiliconClient.jar") && !Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\libraries") && Globals.isConnected)
+                    if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps") && !File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\SiliconClient.jar") && !Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\deps\libraries") && Globals.IsConnected)
                     {
 
                         LaunchButton.Content = "DOWNLOAD";
                         LaunchButton.Click -= LaunchButton_Click;
                         LaunchButton.IsEnabled = true;
                         StatusText.Content = "Required package: SiliconClient.";
-                        LaunchButton.Click += new RoutedEventHandler(LaunchButton_UpdateClient);
-                        return;
+                        LaunchButton.Click += LaunchButton_UpdateClient;
                     }
-                    else if (Updater.checkClient())
+                    else if (Updater.CheckClient())
                     {
                         LaunchButton.Content = "UPDATE";
                         LaunchButton.Click -= LaunchButton_Click;
                         LaunchButton.IsEnabled = true;
                         StatusText.Content = "Client update required.";
-                        LaunchButton.Click += new RoutedEventHandler(LaunchButton_UpdateClient);
-                        return;
+                        LaunchButton.Click += LaunchButton_UpdateClient;
                     }
 
 #if !DEBUG
-                    if (Updater.checkLauncher())
+                    if (Updater.CheckLauncher())
                     {
-                        PLAYText.Content = "UPDATE";
+                        LaunchButton.Content = "UPDATE";
                         LaunchButton.Click -= LaunchButton_Click;
                         LaunchButton.IsEnabled = true;
-                        VersionText.Text = "Launcher update required.";
-                        LaunchButton.Click += new RoutedEventHandler(LaunchButton_UpdateLauncher);
+                        StatusText.Content = "Launcher update required.";
+                        LaunchButton.Click += LaunchButton_UpdateLauncher;
                     }
-
 #endif
                 }
                 else
@@ -78,6 +74,7 @@ namespace SiliconLauncher
 
         private void LaunchButton_Click(object sender, RoutedEventArgs e)
         {
+            Launcher_Settings settings = JsonConvert.DeserializeObject<Launcher_Settings>(File.ReadAllText(Globals.SiliconData + "\\Silicon\\launcher_settings.json"));
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo
@@ -92,7 +89,7 @@ namespace SiliconLauncher
                 Process pr = Process.Start(psi);
                 string strOutput = pr.StandardError.ReadLine().Split(' ')[2].Replace("\"", "");
 
-                if (!strOutput.Contains("1.8"))
+                if (!strOutput.Contains("1.8") && !settings.developer_Settings.bypassJavaWarning)
                 {
                     MessageBox.Show("You have the wrong version of Java installed. We will try launch the game, however unexpected errors and bugs may occur. You can disable this warning in the settings. Java version installed: " + strOutput);
                 }
@@ -104,9 +101,8 @@ namespace SiliconLauncher
             }
 
             var accountJson = "\\Silicon\\account.json";
-
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
+            
+            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(Globals.SiliconData + accountJson));
 
             SiliconHelper.LaunchGame(account.AccessToken, account.Uuid, account.Username);
         }
@@ -114,9 +110,8 @@ namespace SiliconLauncher
         private void LaunchButton_Relaunch(object sender, RoutedEventArgs e)
         {
             var accountJson = "\\Silicon\\account.json";
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
 
-            File.Delete(SiliconData + accountJson);
+            File.Delete(Globals.SiliconData + accountJson);
             SiliconHelper.Relaunch();
         }
 
@@ -132,8 +127,8 @@ namespace SiliconLauncher
                 using (WebClient client = new WebClient())
                 {
                     client.DownloadFileAsync(new Uri("https://cdn.jacksta.dev/silicon/client/siliconclient-latest.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\siliconclient-latest.zip");
-                    client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(UpdateProgress);
-                    client.DownloadFileCompleted += new AsyncCompletedEventHandler(FinishDownload_Client);
+                    client.DownloadProgressChanged += UpdateProgress;
+                    client.DownloadFileCompleted += FinishDownload_Client;
                 }
             }
             catch (Exception ex)
@@ -155,7 +150,7 @@ namespace SiliconLauncher
                 {
                     client.DownloadFileAsync(new Uri("https://github.com/SiliconMC/siliconlauncher/releases/latest/download/SiliconInstaller.exe"), AppDomain.CurrentDomain.BaseDirectory + @"\siliconinstaller-latest.exe");
                     client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(UpdateProgress);
-                    client.DownloadFileCompleted += new AsyncCompletedEventHandler(FinishDownload_Launcher);
+                    client.DownloadFileCompleted += FinishDownload_Launcher;
                 }
             }
             catch (Exception ex)
@@ -163,6 +158,7 @@ namespace SiliconLauncher
                 MessageBox.Show("An error occured. Exception: " + ex);
             }
         }
+
 
         private void UpdateProgress(object sender, DownloadProgressChangedEventArgs e)
         {
@@ -180,7 +176,7 @@ namespace SiliconLauncher
             ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\siliconclient-latest.zip", AppDomain.CurrentDomain.BaseDirectory + "\\deps");
             LaunchButton.Click -= LaunchButton_UpdateClient;
             ProgressBar.Opacity = 0;
-            LaunchButton.Click += new RoutedEventHandler(LaunchButton_Click);
+            LaunchButton.Click += LaunchButton_Click;
             LaunchButton.Content = "PLAY";
             StatusText.Content = "Ready to start.";
             LaunchButton.IsEnabled = true;
@@ -195,26 +191,21 @@ namespace SiliconLauncher
             SiliconHelper.Quit();
         }
 
+
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             var accountJson = "\\Silicon\\account.json";
-            bool isMicrosoft = false;
+            
+            
+            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(Globals.SiliconData + accountJson));
+            bool isMicrosoft = account.IsMsft;
+            
+            if (!isMicrosoft) MojangAccounts.Logout(account.AccessToken);
 
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            Account account = JsonConvert.DeserializeObject<Account>(File.ReadAllText(SiliconData + accountJson));
-
-            if (isMicrosoft)
-            {
-                MicrosoftAccounts.Logout();
-            }
-            else
-            {
-                MojangAccounts.Logout(account.AccessToken);
-            }
             SiliconHelper.LoggingOut("User initiated log out.");
             LaunchButton.Click -= LaunchButton_Click;
             LaunchButton.IsEnabled = true;
-            LaunchButton.Click += new RoutedEventHandler(LaunchButton_Relaunch);
+            LaunchButton.Click += LaunchButton_Relaunch;
         }
 
         public class Account
@@ -225,7 +216,7 @@ namespace SiliconLauncher
             public bool IsMsft { get; set; }
         }
 
-        internal static MainWindow mainWin;
+        internal static MainWindow Main;
 
         private void SettingsButton_Click(object sender, RoutedEventArgs e)
         {

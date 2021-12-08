@@ -9,7 +9,7 @@ namespace SiliconLauncher.Helpers
 {
     class Updater
     {
-        public static bool checkLauncher()
+        public static bool CheckLauncher()
         {
             var client = new RestClient("https://status.jacksta.dev/json");
             var request = new RestRequest("authenticate", Method.GET);
@@ -35,7 +35,7 @@ namespace SiliconLauncher.Helpers
             }
         }
 
-        public static bool checkClient()
+        public static bool CheckClient()
         {
             var client = new RestClient("https://status.jacksta.dev/json");
             var request = new RestRequest("authenticate", Method.GET);

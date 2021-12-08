@@ -1,36 +1,61 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
+﻿using System;
+using System.IO;
 using System.Windows;
+using Microsoft.VisualBasic.Devices;
+using Newtonsoft.Json;
+using SiliconLauncher.Helpers;
 
 namespace SiliconLauncher
 {
     public static class Globals
     {
-        public static bool isConnected;
+        public static bool IsConnected = true;
+        public static string SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
     }
     public partial class App
     {
+
+        private static string FindJava()
+        {
+            var path = Environment.GetEnvironmentVariable("PATH");
+            var directories = path.Split(';');
+
+            foreach (var dir in directories)
+            {
+                var fullpath = Path.Combine(dir, "javaw.exe");
+                if (File.Exists(fullpath)) return fullpath;
+            }
+
+            return null;
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
-            if (SiliconHelper.CheckInternetConnection())
+            if (!SiliconHelper.CheckInternetConnection())
             {
-                Globals.isConnected = true;
+                Globals.IsConnected = false;
+                MessageBox.Show(
+                    "Silicon has detected no internet connection. Try basic troubleshooting steps to restore launcher functionality.");
             }
-            else
-            {
-                Globals.isConnected = false;
-                MessageBox.Show("Silicon has detected no internet connection. Try basic troubleshooting steps to restore launcher functionality.");
-            }
-            ToastNotificationManagerCompat.OnActivated += toastArgs =>
-            {
-                // Obtain the arguments from the notification
-                ToastArguments args = ToastArguments.Parse(toastArgs.Argument);
 
-                // Need to dispatch to UI thread if performing UI operations
-                Current.Dispatcher.Invoke(delegate
+            if(!File.Exists(Globals.SiliconData + "\\Silicon\\launcher_settings.json"))
+            {
+                Launcher_Settings export = new Launcher_Settings
                 {
+                    memoryMax = Convert.ToInt32((new ComputerInfo().TotalPhysicalMemory / (1024 * 1024) / 4 + 16)),
+                    javaDirectory = FindJava(),
+                    developer_Settings = new Developer_Settings
+                    {
+                        bypassJavaWarning = false,
+                    }
 
-                });
-            };
+                };
+
+                Directory.CreateDirectory(Globals.SiliconData + "\\Silicon");
+                File.WriteAllText(Globals.SiliconData + "\\Silicon\\launcher_settings.json", JsonConvert.SerializeObject(export));
+
+
+            }
         }
     }
 }

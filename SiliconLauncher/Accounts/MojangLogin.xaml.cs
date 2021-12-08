@@ -9,9 +9,8 @@ namespace SiliconLauncher
     {
         public MojangLogin()
         {
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
             Thread.Sleep(1500);
-            if (File.Exists(SiliconData + "\\Silicon\\account.json"))
+            if (File.Exists(Globals.SiliconData + "\\Silicon\\account.json"))
             {
                 MainWindow mainWin = new MainWindow();
                 mainWin.Show();
@@ -19,7 +18,7 @@ namespace SiliconLauncher
             }
 
             InitializeComponent();
-            main = this;
+            Main = this;
             Loaded += (s, e) =>
             {
                 MinimizeButton.IsEnabled = true;
@@ -50,7 +49,7 @@ namespace SiliconLauncher
 
         }
 
-        internal static MojangLogin main;
+        internal static MojangLogin Main;
 
     }
 }

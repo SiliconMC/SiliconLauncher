@@ -1,7 +1,6 @@
 ﻿<Application x:Class="SiliconLauncher.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:SiliconLauncher"
              xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
              StartupUri="Accounts/Login.xaml">
     <Application.Resources>

@@ -6,6 +6,18 @@ using System.Collections.Generic;
 
 namespace SiliconLauncher
 {
+    public class Launcher_Settings
+    {
+        public int memoryMax { get; set; }
+        public string javaDirectory { get; set; }
+        public Developer_Settings developer_Settings { get; set; } 
+    }
+
+    public class Developer_Settings
+    {
+        public bool bypassJavaWarning { get; set; }
+    }
+
     public class Prod
     {
         public string version { get; set; }

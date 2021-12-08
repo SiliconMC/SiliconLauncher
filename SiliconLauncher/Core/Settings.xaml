@@ -6,14 +6,27 @@
         mc:Ignorable="d"
         xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
         Title="Silicon Settings"
-        ResizeMode="NoResize" Height="272" Width="511" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen" Closed="AdonisWindow_Closed">
+        ResizeMode="NoResize" Height="361" Width="673" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen" Closed="AdonisWindow_Closed">
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}" />
     </Window.Style>
     <Grid>
-        <Label x:Name="WelcomeBackLabel" Content="Settings" HorizontalAlignment="Left" Height="52" VerticalAlignment="Top" Width="271" FontSize="36" FontFamily="/Silicon;component/Assets/#Inter" VerticalContentAlignment="Bottom" Margin="20,1,0,0"/>
-        <Button x:Name="ApplyButton" HorizontalAlignment="Left" Height="28" Margin="20,195,0,0" VerticalAlignment="Top" Width="228" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Content="APPLY" FontSize="10" FontWeight="Bold"/>
-        <Label x:Name="SiliconVersion" Content="You are using SiliconLauncher" HorizontalAlignment="Left" Height="20" Margin="20,53,0,0" VerticalAlignment="Top" Width="261" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" Opacity="0.5"/>
-        <Button x:Name="ReturnButton" HorizontalAlignment="Left" Height="28" Margin="263,195,0,0" VerticalAlignment="Top" Width="228" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="ReturnButton_Click" Content="RETURN" FontSize="10" FontWeight="Normal"/>
+        <Label x:Name="WelcomeBackLabel" Content="Settings" HorizontalAlignment="Left" Height="67" VerticalAlignment="Top" Width="352" FontSize="48" FontFamily="/Silicon;component/Assets/#Inter" VerticalContentAlignment="Bottom" Margin="20,8,0,0"/>
+        <Button x:Name="ApplyButton" HorizontalAlignment="Left" Height="36" Margin="20,275,0,0" VerticalAlignment="Top" Width="304" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Content="APPLY CHANGES" FontWeight="Bold" FontSize="14" Click="ApplyButton_Click"/>
+        <Label x:Name="SiliconVersion" Content="You are using SiliconLauncher" HorizontalAlignment="Left" Height="26" Margin="20,75,0,0" VerticalAlignment="Top" Width="339" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" Opacity="0.5" FontSize="14"/>
+        <Button x:Name="ReturnButton" HorizontalAlignment="Left" Height="36" Margin="342,275,0,0" VerticalAlignment="Top" Width="296" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="ReturnButton_Click" Content="DISCARD CHANGES &amp; RETURN " FontWeight="Normal" FontSize="14"/>
+        <Label x:Name="Subheading_General" Content="General settings" HorizontalAlignment="Left" Height="26" Margin="341,30,0,0" VerticalAlignment="Top" Width="298" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" FontSize="16"/>
+        <Label x:Name="AllocatedMemory_Subheading" Content="Allocated memory (MB)" HorizontalAlignment="Left" Height="22" Margin="341,57,0,0" VerticalAlignment="Top" Width="234" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" FontSize="14" Opacity="0.5"/>
+        <Label x:Name="JavaExecutable_Subheading" Content="Java executable location" HorizontalAlignment="Left" Height="22" Margin="341,84,0,0" VerticalAlignment="Top" Width="179" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" FontSize="14" Opacity="0.5"/>
+        <CheckBox x:Name="GameInstallReset_CheckBox" HorizontalAlignment="Left" Margin="594,220,0,0" VerticalAlignment="Top" Width="15" />
+        <TextBox  Width="66"  VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="MemoryBox" Margin="542,57,0,0" Height="22" SelectionBrush="#FF3C3C3C" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Background="#FF202020" BorderBrush="#FF242424" />
+        <TextBox  Width="234"  VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="JavaLocationBox" Margin="341,111,0,0" Height="22" SelectionBrush="#FF3C3C3C" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Background="#FF202020" BorderBrush="#FF242424" />
+        <Button x:Name="BrowseButton" HorizontalAlignment="Left" Height="22" Margin="580,111,0,0" VerticalAlignment="Top" Width="28" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="BrowseButton_Click" Content="..." FontWeight="Normal" FontSize="8"/>
+        <Label x:Name="AdvancedSettings_Heading" Content="Advanced settings" HorizontalAlignment="Left" Height="26" Margin="340,163,0,0" VerticalAlignment="Top" Width="266" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" FontSize="16"/>
+        <CheckBox x:Name="JavaBypass_CheckBox" Margin="594,193,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" />
+        <Label x:Name="JavaWarningBypass_Subheading" Content="Bypass Java warnings" HorizontalAlignment="Left" Height="22" Margin="340,189,0,0" VerticalAlignment="Top" Width="239" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" FontSize="14" Opacity="0.5"/>
+        <Label x:Name="Credits_Subheading" Content="Credits" HorizontalAlignment="Left" Height="26" Margin="20,107,0,0" VerticalAlignment="Top" Width="304" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" FontSize="16"/>
+        <Label x:Name="Credits_Text" Content="jacksta/jwhazy - launcher + client&#xD;&#xA;OllieGamez/JoeConnor69 - client" HorizontalAlignment="Left" Height="75" Margin="20,132,0,0" VerticalAlignment="Top" Width="273" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" FontSize="14" Opacity="0.5" />
+        <Label x:Name="ResetGameInstall_Subheading_Copy3" Content="Reset game installation?" HorizontalAlignment="Left" Height="24" Margin="340,216,0,0" VerticalAlignment="Top" Width="239" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Center" FontSize="14" Opacity="0.5"/>
     </Grid>
 </adonisControls:AdonisWindow>

@@ -10,10 +10,9 @@ namespace SiliconLauncher
     {
         public MicrosoftLogin()
         {
-            string SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            Directory.CreateDirectory(SiliconData + "\\Silicon");
+            Directory.CreateDirectory(Globals.SiliconData + "\\Silicon");
             Thread.Sleep(1500);
-            if (File.Exists(SiliconData + "\\Silicon\\account.json"))
+            if (File.Exists(Globals.SiliconData + "\\Silicon\\account.json"))
             {
                 MainWindow mainWin = new MainWindow();
                 mainWin.Show();
@@ -25,7 +24,7 @@ namespace SiliconLauncher
             InitializeComponent();
 
 
-            main = this;
+            Main = this;
             Loaded += (s, e) =>
             {
                 MinimizeButton.IsEnabled = true;
@@ -47,11 +46,11 @@ namespace SiliconLauncher
                 return;
             }
 
-            MicrosoftAccounts.AuthenticateXBL(token);
+            MicrosoftAccounts.AuthenticateXbl(token);
 
         }
 
-        internal static MicrosoftLogin main;
+        internal static MicrosoftLogin Main;
 
     }
 }

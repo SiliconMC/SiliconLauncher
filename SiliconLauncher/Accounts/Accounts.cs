@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using SiliconLauncher.Helpers;
 
 namespace SiliconLauncher
 {
@@ -17,7 +18,6 @@ namespace SiliconLauncher
         {
             try
             {
-                string SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
                 Config config = new Config
                 {
                     accessToken = token,
@@ -26,8 +26,8 @@ namespace SiliconLauncher
                     isMsft = isMsft,
 
                 };
-                Directory.CreateDirectory(SiliconData + "\\Silicon");
-                File.WriteAllText(SiliconData + "\\Silicon\\account.json", JsonConvert.SerializeObject(config));
+                Directory.CreateDirectory(Globals.SiliconData + "\\Silicon");
+                File.WriteAllText(Globals.SiliconData + "\\Silicon\\account.json", JsonConvert.SerializeObject(config));
                 Thread.Sleep(1500);
                 return true;
             }
@@ -78,20 +78,19 @@ namespace SiliconLauncher
 
         public static void Logout(string accessToken)
         {
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            File.Delete(SiliconData + "\\Silicon\\account.json");
-            MainWindow.mainWin.WelcomeBackLabel.Content = "Logged out.";
-            MainWindow.mainWin.LoggedInAsLabel.Content = "Restart Silicon to relogin.";
-            MainWindow.mainWin.LaunchButton.IsEnabled = false;
-            MainWindow.mainWin.SettingsButton.IsEnabled = false;
-            MainWindow.mainWin.LogOutButton.IsEnabled = false;
-            MainWindow.mainWin.AvatarImage.Source = new BitmapImage(new Uri("https://minecraftfaces.com/wp-content/bigfaces/big-steve-face.png"));
+            File.Delete(Globals.SiliconData + "\\Silicon\\account.json");
+            MainWindow.Main.WelcomeBackLabel.Content = "Logged out.";
+            MainWindow.Main.LoggedInAsLabel.Content = "Restart Silicon to relogin.";
+            MainWindow.Main.LaunchButton.IsEnabled = false;
+            MainWindow.Main.SettingsButton.IsEnabled = false;
+            MainWindow.Main.LogOutButton.IsEnabled = false;
+            MainWindow.Main.AvatarImage.Source = new BitmapImage(new Uri("https://minecraftfaces.com/wp-content/bigfaces/big-steve-face.png"));
         }
     }
 
     class MicrosoftAccounts
     {
-        public static void AuthenticateXBL(string token)
+        public static void AuthenticateXbl(string token)
         {
             var client = new RestClient("https://user.auth.xboxlive.com/user");
             var request = new RestRequest("authenticate", Method.POST);
@@ -122,11 +121,11 @@ namespace SiliconLauncher
             }
             else
             {
-                AuthenticateXSTS(body.Token);
+                AuthenticateXsts(body.Token);
             }
         }
 
-        public static void AuthenticateXSTS(string token)
+        public static void AuthenticateXsts(string token)
         {
             var client = new RestClient("https://xsts.auth.xboxlive.com/xsts");
             var request = new RestRequest("authorize", Method.POST);
@@ -149,10 +148,10 @@ namespace SiliconLauncher
             IRestResponse response = client.Execute(request);
             Root body = JsonConvert.DeserializeObject<Root>(response.Content);
 
-            AuthenticateMC(body.Token, body.DisplayClaims.xui[0].uhs);
+            AuthenticateMinecraft(body.Token, body.DisplayClaims.xui[0].uhs);
         }
 
-        public static void AuthenticateMC(string token, string userhash)
+        public static void AuthenticateMinecraft(string token, string userhash)
         {
             var client = new RestClient("https://api.minecraftservices.com/authentication");
             var request = new RestRequest("login_with_xbox", Method.POST);
@@ -206,8 +205,7 @@ namespace SiliconLauncher
 
         public static void Logout()
         {
-            var SiliconData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
-            File.Delete(SiliconData + "\\Silicon\\account.json");
+            File.Delete(Globals.SiliconData + "\\Silicon\\account.json");
         }
 
     }
