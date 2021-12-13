@@ -5,29 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI"
-        Title="Choose login method for Silicon"
-        ResizeMode="NoResize" Height="275.538" Width="510.671" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen">
+
+        Title="Silicon"
+        ResizeMode="NoResize" Height="361" Width="673" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen">
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}" />
     </Window.Style>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="252*" />
-            <ColumnDefinition Width="252*" />
-        </Grid.ColumnDefinitions>
-        <Label x:Name="MethodLabel" Content="Login to Silicon" HorizontalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,11.67,57,170.33" Width="382" FontFamily="/Silicon;component/Assets/#Inter" FontSize="39" Grid.ColumnSpan="2" />
-        <Button x:Name="MojangLoginButton" HorizontalAlignment="Left" Height="56" Margin="90,100,0,0" VerticalAlignment="Top" Width="325" FontFamily="/Silicon;component/Assets/#Inter" Background="#FF202020" BorderBrush="#FF242424" Click="MojangLoginButton_Click" FontSize="16" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" Height="32" Width="251" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="25,0,0,0">
-                <Image x:Name="MicrosoftLogo1" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="32" Source="/Silicon;component/Assets/mojanglogo.png" RenderTransformOrigin="0.5,0.5"/>
-                <Label Margin="-4,0,0,0" Width="209" FontSize="20" Content="Login with Mojang" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="32" HorizontalContentAlignment="Center" FontWeight="Normal"/>
-            </StackPanel>
-        </Button>
-        <Button x:Name="MicrosoftLoginButton" HorizontalAlignment="Left" Height="56" Margin="90,167,0,0" VerticalAlignment="Top" Width="325" FontFamily="/Silicon;component/Assets/#Inter" Background="#FF202020" BorderBrush="#FF242424" Click="MicrosoftLoginButton_Click" FontSize="16" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal" Width="251" Height="32">
+        <Label x:Name="WelcomeBackLabel" Content="Log in to Silicon" HorizontalAlignment="Left" Height="73" Margin="66,18,0,0" VerticalAlignment="Top" Width="397" FontSize="48" FontFamily="/Silicon;component/Assets/#Inter" VerticalContentAlignment="Bottom" Foreground="White" FontWeight="Bold"/>
+        <Button x:Name="LoginButton" HorizontalAlignment="Left" Height="40" Margin="66,241,0,0" VerticalAlignment="Top" Width="157" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LoginButton_Click" Content="LOGIN" FontSize="22" FontWeight="Bold" Foreground="White"/>
+        <TextBox  Width="247"  VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="EmailBox" Margin="66,127,0,0" Height="27" SelectionBrush="#FF3C3C3C" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Background="#FF202020" BorderBrush="#FF242424" />
+        <TextBlock x:Name="EmailSuggest" IsHitTestVisible="False" Text="Mojang email" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="66,107,0,0" Padding="6,3,0,0" Height="20" Width="98" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Foreground="#FFA6A6A6" FontStyle="Italic"/>
+        <PasswordBox  Width="247" VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="PassBox" Margin="66,188,0,0" Height="28" SelectionBrush="#FF3C3C3C" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" BorderBrush="#FF242424" Background="#FF202020" />
+        <TextBlock x:Name="PasswordSuggest" IsHitTestVisible="False" Text="Mojang password" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="66,169,0,0" Padding="6,3,0,0" Height="19" Width="105" FontFamily="/Silicon;component/Assets/#Inter" FontSize="11" Foreground="#FFA6A6A6" FontStyle="Italic"/>
+        <TextBlock x:Name="ElseLabel" IsHitTestVisible="False" Text="or" VerticalAlignment="Top" HorizontalAlignment="Left" Padding="6,3,0,0" Height="20" Width="24" FontFamily="/Silicon;component/Assets/#Inter" FontSize="14" Foreground="White" FontStyle="Normal" Margin="336,165,0,0"/>
+        <Button x:Name="MicrosoftLoginButton" HorizontalAlignment="Left" Height="46" Margin="412,155,0,0" VerticalAlignment="Top" Width="207" FontFamily="/Silicon;component/Assets/#Inter" Background="#FF202020" BorderBrush="#FF242424" Click="MicrosoftLoginButton_Click" FontSize="16">
+            <StackPanel Orientation="Horizontal" Width="180" Height="32">
                 <Image x:Name="MicrosoftLogo2" HorizontalAlignment="Left" Height="32" VerticalAlignment="Top" Width="32" Source="/Silicon;component/Assets/microsoftlogo.png" RenderTransformOrigin="0.5,0.5"/>
-                <Label Margin="10,0,0,0" Width="209" FontSize="20" Content="Login with Microsoft" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="32" HorizontalContentAlignment="Center" FontWeight="Normal"/>
+                <Label Margin="10,0,0,0" Width="142" FontSize="20" Content="MICROSOFT" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="32" HorizontalContentAlignment="Center" FontWeight="Bold" Foreground="White"/>
             </StackPanel>
         </Button>
-        <Label x:Name="InformationLabel" HorizontalContentAlignment="Center" Content="Select your method of choice to continue." HorizontalAlignment="Right" Margin="0,63.007,57,155.66" Width="382" FontFamily="/Silicon;component/Assets/#Inter" Grid.ColumnSpan="2" FontWeight="Normal" RenderTransformOrigin="0.5,0.5" />
+        <TextBlock x:Name="MicrosoftLabel" IsHitTestVisible="False" Text="Using a Microsoft account?" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="379,117,0,0" Padding="6,3,0,0" Height="33" Width="240" FontFamily="/Silicon;component/Assets/#Inter" FontSize="18" Foreground="White" FontStyle="Normal" FontWeight="Normal"/>
+        <Button x:Name="QuitButton" HorizontalAlignment="Left" Height="40" Margin="462,241,0,0" VerticalAlignment="Top" Width="157" FontFamily="/Silicon;component/Assets/#Inter" BorderBrush="#FF242424" Background="#FF202020" Click="LoginButton_Click" Content="QUIT" FontSize="22" FontWeight="Normal" Foreground="White"/>
     </Grid>
 </adonisControls:AdonisWindow>
