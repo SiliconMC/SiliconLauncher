@@ -14,21 +14,6 @@ namespace SiliconLauncher
     }
     public partial class App
     {
-
-        private static string FindJava()
-        {
-            var path = Environment.GetEnvironmentVariable("PATH");
-            var directories = path.Split(';');
-
-            foreach (var dir in directories)
-            {
-                var fullpath = Path.Combine(dir, "javaw.exe");
-                if (File.Exists(fullpath)) return fullpath;
-            }
-
-            return null;
-        }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             if (!SiliconHelper.CheckInternetConnection())
@@ -43,7 +28,7 @@ namespace SiliconLauncher
                 Launcher_Settings export = new Launcher_Settings
                 {
                     memoryMax = Convert.ToInt32((new ComputerInfo().TotalPhysicalMemory / (1024 * 1024) / 4 + 16)),
-                    javaDirectory = FindJava(),
+                    javaDirectory = SiliconHelper.FindJava(),
                     developer_Settings = new Developer_Settings
                     {
                         bypassJavaWarning = false,

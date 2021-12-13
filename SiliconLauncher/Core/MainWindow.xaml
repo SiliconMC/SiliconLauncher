@@ -8,10 +8,13 @@
 
         Title="Silicon"
         ResizeMode="NoResize" Height="361" Width="673" Background="#FF121212" TitleBarBackground="#FF121212" WindowStartupLocation="CenterScreen" Closed="AdonisWindow_Closed">
+
     <Window.Style>
         <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}" />
+        
     </Window.Style>
     <Grid>
+z
         <Label x:Name="WelcomeBackLabel" Content="Welcome back" HorizontalAlignment="Left" Height="73" Margin="66,35,0,0" VerticalAlignment="Top" Width="397" FontSize="48" FontFamily="/Silicon;component/Assets/#Inter" VerticalContentAlignment="Bottom"/>
         <Label x:Name="LoggedInAsLabel" Content="User not logged in. Please restart Silicon." HorizontalAlignment="Left" Height="31" Margin="66,108,0,0" VerticalAlignment="Top" Width="397" FontFamily="/Silicon;component/Assets/#Inter" FontWeight="Normal" VerticalContentAlignment="Top" Opacity="0.5" FontSize="16"/>
         <Image x:Name="AvatarImage" HorizontalAlignment="Left" Height="113" Margin="488,26,0,0" VerticalAlignment="Top" Width="113" Source="/Silicon;component/Assets/account-notsignedin.png"/>
