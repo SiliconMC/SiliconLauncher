@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SiliconLauncher"
              xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
-             StartupUri="Accounts/Login.xaml">
+             StartupUri="Core/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

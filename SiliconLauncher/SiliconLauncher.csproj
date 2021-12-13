@@ -71,27 +71,6 @@
     </Compile>
     <Compile Include="Helpers\JSON.cs" />
     <Compile Include="Helpers\SiliconHelper.cs" />
-    <Compile Include="Accounts\MicrosoftLogin.xaml.cs">
-      <DependentUpon>MicrosoftLogin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Accounts\MojangLogin.xaml.cs">
-      <DependentUpon>MojangLogin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Core\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Accounts\MicrosoftLogin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Accounts\MojangLogin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Accounts\Login.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Core\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,13 +80,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Accounts\Accounts.cs" />
-    <Compile Include="Accounts\Login.xaml.cs">
-      <DependentUpon>Login.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Core\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Updater.cs" />
@@ -143,16 +115,7 @@
     <Resource Include="Assets\silicon-logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\siliconclient-widetofit.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\account-notsignedin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\mojanglogo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\microsoftlogo.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AdonisUI.ClassicTheme">

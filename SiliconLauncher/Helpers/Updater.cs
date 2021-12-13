@@ -34,35 +34,5 @@ namespace SiliconLauncher.Helpers
                 return false;
             }
         }
-
-        public static bool checkClient()
-        {
-            var client = new RestClient("https://status.jacksta.dev/json");
-            var request = new RestRequest("authenticate", Method.GET);
-
-            IRestResponse response = client.Execute(request);
-            Root body = JsonConvert.DeserializeObject<Root>(response.Content);
-
-            var versionInfo = AppDomain.CurrentDomain.BaseDirectory;
-
-            var accountJson = "\\deps\\information.json";
-
-            Root version = JsonConvert.DeserializeObject<Root>(File.ReadAllText(versionInfo + accountJson));
-
-            try
-            {
-                if (body == null) return false;
-
-                if (body.silicon.client.prod.version != version.version) return true;
-
-                return false;
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("An error occured. Exception: " + e);
-                return false;
-            }
-
-        }
     }
 }
